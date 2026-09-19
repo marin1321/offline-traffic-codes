@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "actualizado": "YYYY-MM-DD",
+  "nota": "Template only. Real usuarios.json lives in the PRIVATE data repo → Cloudflare Pages. Never commit production passwords to the public app repo.",
+  "usuarios": [
+    {
+      "usuario": "admin",
+      "password": "change-me",
+      "nombre": "Administrator",
+      "activo": true,
+      "device_ids": []
+    },
+    {
+      "usuario": "oscar",
+      "password": "change-me",
+      "nombre": "Agent name",
+      "activo": true,
+      "device_ids": []
+    }
+  ]
+}

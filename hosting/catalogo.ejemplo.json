@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "actualizado": "YYYY-MM-DD",
+  "fuente_nota": "Example shape only. Production catalog lives in the private data repo.",
+  "infracciones": [
+    {
+      "codigo": "C.28",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "Usar resonadores, dispositivos productores de ruido…",
+      "referencias": ["Art. 131", "Res. 20"]
+    }
+  ]
+}

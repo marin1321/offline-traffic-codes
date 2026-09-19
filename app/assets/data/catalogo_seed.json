@@ -1,0 +1,228 @@
+{
+  "version": 2,
+  "actualizado": "2026-09-19",
+  "fuente_nota": "Muestra de forma con campo referencias (artículos/resoluciones). No es catálogo oficial completo.",
+  "infracciones": [
+    {
+      "codigo": "A.01",
+      "categoria": "A",
+      "categoria_titulo": "Vehículos no automotores",
+      "descripcion": "No transitar por la derecha de la vía.",
+      "referencias": [
+        "Art. 60",
+        "Art. 94"
+      ]
+    },
+    {
+      "codigo": "A.02",
+      "categoria": "A",
+      "categoria_titulo": "Vehículos no automotores",
+      "descripcion": "Agarrarse de otro vehículo en movimiento.",
+      "referencias": []
+    },
+    {
+      "codigo": "A.03",
+      "categoria": "A",
+      "categoria_titulo": "Vehículos no automotores",
+      "descripcion": "Transportar personas o cosas que reduzcan la visibilidad o incomoden la conducción.",
+      "referencias": []
+    },
+    {
+      "codigo": "A.04",
+      "categoria": "A",
+      "categoria_titulo": "Vehículos no automotores",
+      "descripcion": "Transitar por andenes, aceras, puentes u otros lugares destinados a peatones.",
+      "referencias": []
+    },
+    {
+      "codigo": "A.05",
+      "categoria": "A",
+      "categoria_titulo": "Vehículos no automotores",
+      "descripcion": "No respetar las señales de tránsito.",
+      "referencias": [
+        "Art. 131"
+      ]
+    },
+    {
+      "codigo": "A.06",
+      "categoria": "A",
+      "categoria_titulo": "Vehículos no automotores",
+      "descripcion": "Transitar sin los dispositivos luminosos requeridos.",
+      "referencias": []
+    },
+    {
+      "codigo": "B.01",
+      "categoria": "B",
+      "categoria_titulo": "Conductor / propietario",
+      "descripcion": "Conducir sin llevar consigo la licencia de conducción.",
+      "referencias": [
+        "Art. 18",
+        "Art. 19"
+      ]
+    },
+    {
+      "codigo": "B.03",
+      "categoria": "B",
+      "categoria_titulo": "Conductor / propietario",
+      "descripcion": "Conducir sin placas, con placas que no puedan identificarse correctamente o alterar características de identificación del vehículo.",
+      "referencias": [
+        "Art. 42",
+        "Art. 46"
+      ]
+    },
+    {
+      "codigo": "B.04",
+      "categoria": "B",
+      "categoria_titulo": "Conductor / propietario",
+      "descripcion": "Conducir con placas adulteradas, retocadas o alteradas.",
+      "referencias": []
+    },
+    {
+      "codigo": "B.06",
+      "categoria": "B",
+      "categoria_titulo": "Conductor / propietario",
+      "descripcion": "Conducir con placas falsas.",
+      "referencias": []
+    },
+    {
+      "codigo": "B.08",
+      "categoria": "B",
+      "categoria_titulo": "Conductor / propietario",
+      "descripcion": "No pagar el peaje en los sitios establecidos.",
+      "referencias": []
+    },
+    {
+      "codigo": "B.10",
+      "categoria": "B",
+      "categoria_titulo": "Conductor / propietario",
+      "descripcion": "Conducir con vidrios polarizados/entintados sin el permiso correspondiente.",
+      "referencias": []
+    },
+    {
+      "codigo": "C.01",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "Presentar licencia de conducción adulterada o ajena.",
+      "referencias": []
+    },
+    {
+      "codigo": "C.02",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "Estacionar en lugares prohibidos, como andenes, zonas verdes, ciertos cruces, puentes, etc.",
+      "referencias": []
+    },
+    {
+      "codigo": "C.06",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "No utilizar el cinturón de seguridad en los casos exigidos.",
+      "referencias": [
+        "Art. 82"
+      ]
+    },
+    {
+      "codigo": "C.07",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "No señalizar adecuadamente giros, cambios de carril o reducciones de velocidad.",
+      "referencias": []
+    },
+    {
+      "codigo": "C.14",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "Transitar por sitios restringidos o en condiciones prohibidas para determinados vehículos.",
+      "referencias": []
+    },
+    {
+      "codigo": "C.24",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "Conducir motocicleta sin observar determinadas normas de circulación y seguridad establecidas para estos vehículos.",
+      "referencias": []
+    },
+    {
+      "codigo": "C.26",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "Transitar con vehículos de 3,5 toneladas o más por el carril izquierdo cuando haya más de un carril.",
+      "referencias": []
+    },
+    {
+      "codigo": "C.27",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "Llevar carga o pasajeros de manera que obstruyan la visibilidad o el control del vehículo.",
+      "referencias": []
+    },
+    {
+      "codigo": "C.28",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "Usar resonadores, dispositivos productores de ruido, cornetas en perímetro urbano, sirenas o luces reservadas, o circular sin silenciador en correcto estado.",
+      "referencias": [
+        "Art. 131",
+        "Res. 20"
+      ]
+    },
+    {
+      "codigo": "C.29",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "Conducir a una velocidad superior a la máxima permitida.",
+      "referencias": [
+        "Art. 106",
+        "Art. 109"
+      ]
+    },
+    {
+      "codigo": "C.30",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "No atender una señal de CEDA EL PASO.",
+      "referencias": []
+    },
+    {
+      "codigo": "C.31",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "No acatar señales de tránsito o requerimientos de agentes de tránsito.",
+      "referencias": []
+    },
+    {
+      "codigo": "C.32",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "No respetar el paso o prelación de los peatones en los lugares establecidos.",
+      "referencias": []
+    },
+    {
+      "codigo": "C.35",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "No realizar la revisión técnico-mecánica y de emisiones en los plazos establecidos, o no cumplir las condiciones técnico-mecánicas exigidas.",
+      "referencias": [
+        "Art. 50",
+        "Art. 53"
+      ]
+    },
+    {
+      "codigo": "C.38",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "Usar teléfonos o sistemas móviles de comunicación mientras se conduce, salvo los sistemas que permitan utilizarlos con las manos libres.",
+      "referencias": [
+        "Art. 131",
+        "Ley 1696"
+      ]
+    },
+    {
+      "codigo": "C.39",
+      "categoria": "C",
+      "categoria_titulo": "Infracciones de mayor cuantía ordinaria",
+      "descripcion": "Vulnerar las reglas de estacionamiento establecidas en el artículo 77.",
+      "referencias": []
+    }
+  ]
+}

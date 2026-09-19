@@ -1,0 +1,47 @@
+{
+  "version": 5,
+  "actualizado": "2026-09-19",
+  "nota": "Seed de desarrollo. Login por usuario (no cédula). Credenciales de demo únicamente.",
+  "usuarios": [
+    {
+      "usuario": "admin",
+      "password": "admin123",
+      "nombre": "Administrador (dev)",
+      "activo": true,
+      "device_ids": [
+        "dev-device-alpha",
+        "dev-device-beta",
+        "4056aed5-5938-4a80-addc-46ccd55c3c6e",
+        "fb8e6c22-1728-45e7-8a86-1fb749e5cb6e"
+      ]
+    },
+    {
+      "usuario": "oscar",
+      "password": "piloto123",
+      "nombre": "Agente piloto (dev)",
+      "activo": true,
+      "device_ids": [
+        "dev-device-alpha",
+        "dev-device-beta",
+        "4056aed5-5938-4a80-addc-46ccd55c3c6e",
+        "fb8e6c22-1728-45e7-8a86-1fb749e5cb6e"
+      ]
+    },
+    {
+      "usuario": "revocado",
+      "password": "revocado",
+      "nombre": "Usuario revocado (dev)",
+      "activo": false,
+      "device_ids": [
+        "dev-device-alpha"
+      ]
+    },
+    {
+      "usuario": "sindevice",
+      "password": "sindevice",
+      "nombre": "Sin teléfonos enrolados (dev)",
+      "activo": true,
+      "device_ids": []
+    }
+  ]
+}

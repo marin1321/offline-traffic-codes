@@ -1,0 +1,72 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.iml
+
+# Environment & secrets (never commit)
+.env
+.env.*
+!.env.example
+**/*secrets*
+**/*secret*
+**/credentials*
+**/*keystore*
+**/*.jks
+**/*.p12
+**/*.pem
+**/google-services.json
+**/GoogleService-Info.plist
+
+# Local / production user data (private data repo only)
+**/usuarios.local.json
+**/usuarios.prod.json
+hosting/usuarios.json
+hosting/catalogo.json
+# Keep only *.ejemplo.json and hosting/README.md in the public repo
+
+# Flutter / Dart
+app/.dart_tool/
+app/.packages
+app/.pub-cache/
+app/.pub/
+app/build/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.metadata
+app/**/Generated.xcconfig
+app/**/flutter_export_environment.sh
+app/**/doc/api/
+app/.android/
+app/.ios/
+app/android/.gradle/
+app/android/local.properties
+app/android/**/gradle-wrapper.jar
+app/android/.idea/
+app/android/**/captures/
+app/android/key.properties
+app/android/app/upload-keystore.jks
+app/ios/Pods/
+app/ios/.symlinks/
+app/ios/Flutter/Flutter.framework
+app/ios/Flutter/Flutter.podspec
+app/ios/ServiceDefinitions.json
+
+# Build artifacts
+dist/
+coverage/
+*.log
+*.apk
+*.aab
+*.ipa
+
+# Optional local tooling
+.grok/
+.claude/
+.cursor/
