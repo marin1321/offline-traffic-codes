@@ -1,14 +1,18 @@
 # Data hosting (private repo → Cloudflare Pages)
 
-Spanish ops notes for the **split** between portfolio code and sensitive/runtime data.
-
 ## Goal
 
 | Repo | Visibility | Contents |
 | --- | --- | --- |
-| **This app repo** | Public (portfolio) | Flutter source, docs, demo seed only |
-| **Data repo** | **Private** | Real `catalogo.json`, `usuarios.json` |
+| **App repo** [`offline-traffic-codes`](https://github.com/marin1321/offline-traffic-codes) | Public (portfolio) | Flutter source, English docs, demo seeds only |
+| **Data repo** [`codigos-transito-data`](https://github.com/marin1321/codigos-transito-data) | **Private** | Real `catalogo.json`, `usuarios.json` |
 | **Cloudflare Pages** | Serves HTTPS | Deployed from the private repo |
+
+## Why this split
+
+- Portfolio shows **engineering**, not agent passwords.  
+- Cloudflare gives **HTTPS + CDN** without running a VPS.  
+- Daily ops: edit JSON on your PC → `git push` → Pages publishes.
 
 ## Private data repo layout
 
@@ -16,7 +20,7 @@ Spanish ops notes for the **split** between portfolio code and sensitive/runtime
 codigos-transito-data/          # private on GitHub
   catalogo.json
   usuarios.json
-  README.md                     # how to edit / bump version
+  README.md
 ```
 
 ### `usuarios.json` shape
@@ -28,36 +32,34 @@ codigos-transito-data/          # private on GitHub
     {
       "usuario": "oscar",
       "password": "…",
-      "nombre": "Nombre visible",
+      "nombre": "Display name",
       "activo": true,
-      "device_ids": ["uuid-del-telefono"]
+      "device_ids": ["phone-uuid"]
     }
   ]
 }
 ```
 
-Login is **username + password** (not cédula).  
-Usernames are matched **case-insensitively**.
+Login is **username + password** (not a national ID). Usernames match **case-insensitively**.
 
 ### Day-to-day edit flow
 
 ```bash
-# on your PC
 cd codigos-transito-data
 # edit catalogo.json or usuarios.json
 # bump "version"
 git add .
 git commit -m "Add C.40; enroll oscar device"
 git push
-# Cloudflare Pages auto-deploys → phones pick it up on next open/sync
+# Cloudflare Pages auto-deploys → phones refresh on next open/sync
 ```
 
-## Cloudflare Pages
+## Cloudflare Pages setup (checklist)
 
-1. Cloudflare dashboard → **Workers & Pages** → Create project.  
-2. Connect the **private** GitHub data repo.  
-3. Build: static assets, output directory = repo root (or `/` if files are at root).  
-4. After deploy, copy HTTPS URLs, e.g.:
+1. Cloudflare dashboard → **Workers & Pages** → Create.  
+2. Connect private GitHub repo `codigos-transito-data`.  
+3. Build: static site; output directory = repository root.  
+4. Copy HTTPS URLs, e.g.:
 
 ```text
 https://codigos-transito-data.pages.dev/catalogo.json
@@ -74,16 +76,16 @@ USUARIOS_URL='https://….pages.dev/usuarios.json' \
 
 ## Security honesty
 
-- Pages gives **HTTPS + CDN**, not secrecy against someone who has the URL (the APK embeds it).  
-- Private GitHub keeps secrets **out of your public portfolio**.  
-- Still experimental auth: prefer strong-ish passwords; revoke with `activo: false`; enroll devices in release.  
+- Pages provides **HTTPS + CDN**, not secrecy against someone who has the URL (the APK embeds it).  
+- Private GitHub keeps secrets **out of the public portfolio**.  
+- Still an experimental gate: prefer decent passwords; revoke with `activo: false`; enroll devices in release.  
 - Do **not** commit production `usuarios.json` to the public app repo (see root `.gitignore`).
 
 ## Public app repo `hosting/`
 
-Only **examples**:
+Examples only:
 
 - `catalogo.ejemplo.json`
 - `usuarios.ejemplo.json`
 
-See `hosting/README.md`.
+See [`../hosting/README.md`](../hosting/README.md).

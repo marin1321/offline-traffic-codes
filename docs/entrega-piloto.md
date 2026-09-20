@@ -1,108 +1,99 @@
-# Entrega al piloto (F5)
+# Pilot delivery (F5)
 
-Guía para instalar **Códigos de Tránsito** en el Android del agente piloto (padre) y dejarlo operativo.
+How to install **Códigos de Tránsito** on the pilot officer’s Android phone.
 
-## Qué entregas
+## What you deliver
 
-| Archivo | Descripción |
+| File | Description |
 | --- | --- |
-| `dist/codigos-transito-piloto.apk` | APK de entrega (versión 1.0.0) |
-| Este documento | Pasos de instalación y enrolamiento |
+| `dist/codigos-transito-piloto.apk` | Release APK |
+| This document | Install + enrollment steps |
 
-## Mensaje listo para WhatsApp (al piloto)
-
-Puedes copiar y pegar:
+## WhatsApp message (to the pilot)
 
 ```text
-Hola, te paso la app Códigos de Tránsito (consulta de infracciones offline).
+Hi — here is the Códigos de Tránsito app (offline infraction lookup).
 
-1) Descarga e instala el APK que te envío.
-2) Si Android avisa de "origen desconocido", permite instalar desde Archivos/WhatsApp.
-3) Abre la app. En la pantalla de ingreso verás un "código de este teléfono".
-4) Toca copiar y envíamelo por este chat.
-5) Cuando te diga que ya quedó, entra con la usuario y contraseña que te pasé.
-6) Prueba buscar "resonador" o "c28". Debe aparecer C.28.
-7) Puedes usarla sin internet (modo avión) para consultar.
+1) Download and install the APK I sent.
+2) If Android warns about unknown sources, allow install from Files/WhatsApp.
+3) Open the app. On the login screen you will see a "code for this phone".
+4) Tap copy and send it to me in this chat.
+5) When I confirm it is registered, sign in with the username and password I gave you.
+6) Try searching "resonador" or "c28". You should see C.28.
+7) You can use it without internet (airplane mode) for lookup.
 
-Es una herramienta orientativa, no reemplaza la norma oficial.
+This is an orientation tool; it does not replace the official statute.
 ```
 
-## Checklist del administrador (tú)
+## Promoter checklist
 
-### Antes de enviar el APK
+### Before sending the APK
 
-- [ ] APK generado con `./scripts/build-piloto.sh` (o el build release acordado).
-- [ ] Decides usuario y contraseña del piloto (anótalas en un sitio privado, **no** en el repo público).
-- [ ] Si usarás sync remoto: JSON de usuarios y catálogo publicados, y el APK compilado con esas `CATALOGO_URL` / `USUARIOS_URL`.
+- [ ] APK built with `./scripts/build-piloto.sh` (and production URLs if using Pages).  
+- [ ] Pilot **username + password** chosen (store privately—not in the public repo).  
+- [ ] If using remote sync: `catalogo.json` / `usuarios.json` published; APK baked with those URLs.
 
-### Enrolamiento
+### Enrollment
 
-1. El piloto instala y te manda el **código del teléfono**.
-2. Agregas ese id en `device_ids` de su usuario:
-   - **Con remoto (recomendado):** editas `usuarios.json` en el hosting, subes `version`, el piloto abre la app con red (o toca sincronizar tras login de un admin… o reintenta login).
-   - **Solo seed en APK:** editas `app/assets/data/usuarios_seed.json`, subes `version`, **generas otro APK** y se lo reenvías.
-3. Confirmas por WhatsApp: “ya quedó, prueba entrar”.
+1. Pilot installs and sends the **phone code**.  
+2. You add that id under `device_ids` for their user:
+   - **Remote (recommended):** edit private `usuarios.json`, bump `version`, push → Pages.  
+   - **Seed-only:** edit APK seed, bump version, **rebuild APK**, resend.  
+3. Confirm: “you’re set—try logging in.”
 
-### Ejemplo de usuario (plantilla)
+### User template
 
 ```json
 {
-  "usuario": "nombre_usuario",
-  "password": "clave-que-acordaron",
-  "nombre": "Nombre del agente",
+  "usuario": "agent_username",
+  "password": "agreed-password",
+  "nombre": "Agent display name",
   "activo": true,
-  "device_ids": [
-    "uuid-que-te-envio-por-whatsapp"
-  ]
+  "device_ids": ["uuid-from-whatsapp"]
 }
 ```
 
-Varios teléfonos del mismo agente: varios ids en `device_ids`.
+## Install details on the phone
 
-## Instalación en el teléfono (detalle)
+1. Open the APK from WhatsApp / Files / Drive.  
+2. If needed: **Settings → Apps → [source] → Install unknown apps → Allow**.  
+3. Install → Open.  
+4. No Play Store required.
 
-1. Abrir el APK desde WhatsApp / Files / Drive.  
-2. Si pide permiso: **Ajustes → Apps → [origen] → Instalar apps desconocidas → Permitir**.  
-3. Instalar → Abrir.  
-4. No hace falta Play Store.
+## Smoke test (D-024)
 
-## Prueba de humo (D-024) — contigo o con el piloto
+- [ ] Login with username + password + enrolled device (release).  
+- [ ] Infraction list visible.  
+- [ ] Category filter.  
+- [ ] Search `c28` → **C.28**.  
+- [ ] Search `resonador` → **C.28**.  
+- [ ] Open detail (description + referencias if any).  
+- [ ] **Airplane mode** still works for catalog.  
+- [ ] (If remote) Online sync updates catalog; offline does not break.  
+- [ ] Logout and login again.  
+- [ ] Next calendar day asks for login again.
 
-- [ ] Login con cédula + clave + device enrolado.  
-- [ ] Listado de infracciones visible.  
-- [ ] Filtro por categoría (A/B/C…).  
-- [ ] Buscar `c28` → **C.28**.  
-- [ ] Buscar `resonador` → **C.28**.  
-- [ ] Abrir detalle de una infracción.  
-- [ ] **Modo avión:** lista, filtro, búsqueda y detalle siguen OK.  
-- [ ] (Si hay remoto) Con red, sync actualiza catálogo; sin red no rompe.  
-- [ ] Cerrar sesión y volver a entrar.
+## Dev-only accounts (not the real pilot)
 
-## Credenciales de desarrollo (solo pruebas, no piloto real)
+| Username | Password |
+| --- | --- |
+| `admin` | `admin123` |
+| `oscar` | `piloto123` |
 
-| Usuario | Clave | Device de demo |
-| --- | --- | --- |
-| `oscar` | `piloto123` | `dev-device-alpha` / `beta` (builds con `DEVICE_ID_OVERRIDE`) |
+**Do not use these on the father’s phone.** Create real credentials.
 
-**No uses estas claves en el teléfono del padre.** Crea las suyas.
-
-## Build de entrega
+## Build
 
 ```bash
 ./scripts/build-piloto.sh
-# → dist/codigos-transito-piloto.apk
-```
 
-Con remoto de producción:
-
-```bash
-CATALOGO_URL='https://tu-dominio/catalogo.json' \
-USUARIOS_URL='https://tu-dominio/usuarios.json' \
+CATALOGO_URL='https://….pages.dev/catalogo.json' \
+USUARIOS_URL='https://….pages.dev/usuarios.json' \
 ./scripts/build-piloto.sh
 ```
 
-## Límites conscientes (recordatorio)
+## Conscious limits
 
-- Auth es un pestillo experimental, no seguridad bancaria.  
-- Sin sync, un revocado offline puede seguir hasta que sincronice.  
-- El catálogo seed no es el listado oficial completo hasta que lo completes y publiques.
+- Auth is an experimental gate, not bank security.  
+- Without sync, a revoked offline user may keep an old copy until they sync.  
+- Seed catalog is not the full official list until you complete and publish it.

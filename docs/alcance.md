@@ -1,39 +1,39 @@
-# Alcance
+# Scope
 
-> Contrato cerrado en lo esencial.
+> Contract: D-007 … D-010, D-019, D-020, D-028 … D-033, D-037.
 
-## Tipo de producto
+## Product type
 
-App **Android (Flutter, APK)** de consulta de infracciones para **agentes de tránsito**. Piloto = padre del promotor. **Sin iOS.**
+**Android (Flutter, APK)** consultation app for **traffic officers**. Pilot = promoter’s father. **No iOS.**
 
 ## MVP
 
-1. Instalar por **APK**  
-2. Login **cédula + contraseña + device_id** (usuarios.json híbrido; multi-teléfono)  
-3. Listado + filtro por categoría  
-4. Búsqueda por código y descripción  
-5. Detalle código + descripción  
-6. Offline real  
-7. Catálogo **híbrido** (seed + sync JSON estático)
+1. Install via **APK**  
+2. Login **username + password + device_id** (hybrid `usuarios.json`)  
+3. List + category filter  
+4. Search by code and description  
+5. Detail: description + optional `referencias`  
+6. Real offline use  
+7. Hybrid catalog (seed + static JSON sync)
 
-### Demo
+### Acceptance demo
 
-> APK → login → modo avión → “resonador” → **C.28**.
+> APK → login → airplane mode → search “resonador” → **C.28**.
 
-## Fuera de alcance (v1)
+## Out of scope (v1)
 
-- iOS / Apple Developer / PWA de soporte  
+- iOS / Apple Developer / support PWA  
 - Play Store / App Store  
-- Backend de auth, pagos, SIMIT, IA, multi-rol, campos extra  
+- Auth backend, payments, SIMIT, AI, multi-role, extra fine amount fields  
 
-## Criterios de éxito
+## Success criteria
 
-Ver **D-024** y **D-010** en el contrato (piloto encuentra códigos offline; APK real instalado).
+See **D-024** and **D-010** (pilot finds codes offline; real APK installed).
 
-## Historias prioritarias
+## Priority stories
 
-| ID | Como… | Quiero… | Para… | P |
+| ID | As a… | I want… | So that… | P |
 | --- | --- | --- | --- | --- |
-| H1–H5 | agente | listar / filtrar / buscar / detalle / offline | comparendo | P0 |
-| H6 | agente | login cédula+clave | entrar a su build | P0 |
-| H7 | promotor | editar JSON usuarios + APK | personalizar | P1 |
+| H1–H5 | officer | list / filter / search / detail / offline | write the citation | P0 |
+| H6 | officer | username + password login | enter my build | P0 |
+| H7 | promoter | edit users JSON + APK/remote | customize installs | P1 |

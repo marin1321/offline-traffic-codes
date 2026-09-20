@@ -1,57 +1,45 @@
-# Stack y arquitectura
+# Stack and architecture
 
-> Decisiones cerradas en el contrato: **D-015 … D-021**, **D-023**.  
-> Debate histórico de candidatos (Flutter vs Expo vs PWA, etc.) quedó resuelto el 2026-09-19.
+> Closed in the contract: **D-015 … D-021**, **D-023**, **D-038**.
 
-## Resumen acordado
+## Agreed summary
 
-| Capa | Elección | Estado |
+| Layer | Choice | Status |
 | --- | --- | --- |
-| Plataforma | **Solo Android** | Decidido |
-| iOS | **Fuera de alcance** (sin Apple Developer; no es objetivo) | Decidido |
-| Framework | **Flutter** (Dart) | Decidido |
-| Entregable | **APK** sideload (sin Play Store) | Decidido |
-| Backend de app | Ninguno | Decidido |
-| Catálogo | JSON híbrido (seed local + GET estático) | Decidido |
-| Auth | Híbrido + device_id + multi-teléfono | **Decidido** |
-| IA | No | Decidido |
+| Platform | **Android only** | Decided |
+| iOS | **Out of scope** | Decided |
+| Framework | **Flutter** (Dart) | Decided |
+| Deliverable | **APK** sideload (no Play Store) | Decided |
+| App backend | None | Decided |
+| Catalog | Hybrid JSON (seed + remote) | Decided |
+| Auth | Hybrid JSON + device_id + username | Decided |
+| AI | No | Decided |
+| Data hosting | Private GitHub → Cloudflare Pages | Decided |
 
-## Por qué Flutter (si iOS no importa)
+## Why Flutter (even without iOS)
 
-El promotor delegó el lenguaje. Con **solo Android** también valía **Kotlin nativo**. Se eligió **Flutter** porque:
+1. Strong fit for list + search + offline + APK.  
+2. Clear `flutter build apk` path for the pilot.  
+3. Fast MVP UI without fighting platform XML by default.  
 
-1. Encaja muy bien con lista + búsqueda + offline + APK.
-2. `flutter build apk` es un flujo claro para el piloto.
-3. Buena velocidad de MVP y UI consistente sin pelearse con XML/Compose si no hace falta.
-4. No se eligió “por multiplataforma”: iOS está explícitamente **fuera**. Si un día se reabre iOS, Flutter *podría* reutilizarse, pero **no es un compromiso actual**.
+## Rejected (reminder)
 
-## Descartado (recordatorio)
-
-| Opción | Por qué no |
+| Option | Why not |
 | --- | --- |
-| Expo / RN | Sin preferencia JS; Flutter cubre el caso |
-| PWA | APK nativo basta; el piloto acepta cualquier instalación simple; iOS no se soporta |
-| Kotlin-only | Alternativa legítima; Flutter ganó por decisión de co-diseño/DX |
-| Apple / TestFlight / PWA-iOS | Sin presupuesto Apple Developer; iPhone no es objetivo |
+| Expo / RN | No JS preference; Flutter covers the case |
+| PWA | Native APK preferred; iOS unsupported |
+| Kotlin-only | Valid Android-only path; Flutter chosen for DX |
+| Apple / TestFlight | Explicitly out of scope |
 
-## Piezas técnicas previstas (implementación)
+## Runtime pieces
 
-| Pieza | Enfoque tentativo |
+| Piece | Approach |
 | --- | --- |
-| UI | Pantallas Flutter (login, catálogo, detalle) |
-| Catálogo seed | Asset JSON en el APK |
-| Copia local | Almacenamiento en disco de la app tras primer arranque / sync |
-| Sync | HTTP GET a URL de `catalogo.json` (+ `version`) |
-| Auth | Leer `usuarios.json` (asset o asset por flavor) y validar en local |
-| Búsqueda | Filtrado en memoria sobre el catálogo cargado (suficiente al tamaño típico); FTS solo si hace falta después |
+| UI | Flutter screens (login, catalog, detail, about) |
+| Catalog seed | Asset JSON in the APK |
+| Local copy | App documents JSON cache |
+| Sync | HTTP GET + `version` compare |
+| Auth | `usuarios.json` validation + installation UUID |
+| Session | SharedPreferences; calendar-day expiry |
 
-El detalle de librerías exactas se fija al implementar (no bloquea el contrato).
-
-## Distribución
-
-Ver [`distribucion.md`](./distribucion.md).
-
-
-## Auth
-
-Ver [`auth.md`](./auth.md): usuarios.json híbrido + UUID de instalación; multi-device; **sin IP**; sin R1/R2 obligatorias.
+Distribution details: [`distribucion.md`](./distribucion.md).

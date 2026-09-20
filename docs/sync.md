@@ -1,68 +1,52 @@
-# Sync híbrido (F4)
+# Hybrid sync (F4)
 
-Catálogo y usuarios siguen el mismo modelo (D-023 / D-035):
+Catalog and users follow the same model (D-023 / D-035):
 
 ```text
-APK seed (assets)  →  copia local en el teléfono  ←  JSON estático remoto (opcional)
+APK seed (assets)  →  local copy on phone  ←  optional remote static JSON
                               ↑
-                         la app lee siempre de aquí
+                     app always reads from here
 ```
 
-## Comportamiento
+## Behavior
 
-1. **Primera vez / sin cache:** se copia el seed del APK al almacenamiento local.  
-2. **Con red y URL configurada:** `GET` del JSON remoto; si `version` remota **>** local, se reemplaza la copia.  
-3. **Sin red o fallo:** se sigue con la última copia local (o seed). La consulta **no se bloquea**.  
-4. **Login / arranque:** intenta sync de usuarios (best-effort).  
-5. **Botón ⟳ / pull-to-refresh:** sync catálogo + usuarios.
+1. **First run / empty cache:** copy APK seed to local storage.  
+2. **With network + URL:** `GET` remote JSON; if remote `version` **>** local, replace.  
+3. **No network or failure:** keep last local copy (or seed). Consultation is **not** blocked.  
+4. **Login / startup:** best-effort users sync.  
+5. **Sync button ⟳ / pull-to-refresh:** catalog + users.  
+6. **Newer seed in a new APK** (higher `version`) replaces a stale local cache.
 
-## Configurar URLs
+There is **no polling loop** while the app stays open—only open/login/manual triggers.
 
-Al compilar o ejecutar:
+## Configure URLs
 
 ```bash
 flutter run -d <device> \
-  --dart-define=DEVICE_ID_OVERRIDE=dev-device-alpha \
-  --dart-define=CATALOGO_URL=http://10.0.2.2:8787/catalogo.json \
-  --dart-define=USUARIOS_URL=http://10.0.2.2:8787/usuarios.json
+  --dart-define=CATALOGO_URL=https://your.pages.dev/catalogo.json \
+  --dart-define=USUARIOS_URL=https://your.pages.dev/usuarios.json
 ```
 
-| Define | Uso |
+| Define | Use |
 | --- | --- |
-| `CATALOGO_URL` | JSON de infracciones |
-| `USUARIOS_URL` | JSON de agentes / device_ids |
+| `CATALOGO_URL` | Infractions JSON |
+| `USUARIOS_URL` | Agents JSON |
 
-Sin defines: la app funciona solo con seed (como F1–F3).
+Empty defines → seed-only (like early phases).
 
-### Emulador → Mac
+### Emulator → host machine HTTP (local test)
 
-`10.0.2.2` es el localhost de la máquina anfitriona vista desde el emulador Android.
-
-### Teléfono físico en la misma Wi‑Fi
-
-Usa la IP LAN de tu Mac, p. ej. `http://192.168.1.20:8787/catalogo.json`.
-
-## Servidor local de prueba
-
-En el repo:
+`10.0.2.2` is the host loopback from an Android emulator.
 
 ```bash
-./scripts/serve-remote.sh
-# sirve hosting/ en :8787
+./scripts/serve-remote.sh   # if using local samples
+USE_REMOTE=1 ./scripts/run-app.sh
 ```
 
-Archivos:
+## Production hosting
 
-- `hosting/catalogo.json` — **v2**, incluye infracción demo **D.01**
-- `hosting/usuarios.json` — **v2**
+Private GitHub data repo → **Cloudflare Pages**. See [`data-hosting.md`](./data-hosting.md).
 
-## Producción
+## Versioning
 
-Sube los JSON a cualquier hosting estático (GitHub Pages, Cloudflare, S3, Firebase Hosting, etc.) y compila el APK con esas URLs HTTPS.
-
-**No** mezcles usuarios y catálogo en el mismo archivo.  
-El JSON de usuarios es sensible (cédulas/claves): URL poco adivinable; no lo indexes en un sitio público genérico si puedes evitarlo.
-
-## Versionado
-
-Sube el campo entero `version` cada vez que publiques un JSON nuevo. Si la remota no es mayor, la app no pisa la copia local.
+Bump the integer `version` whenever you publish a real content change. If remote is not greater, the app does not overwrite local.

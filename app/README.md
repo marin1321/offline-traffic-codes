@@ -1,8 +1,8 @@
-# App — Códigos de Tránsito
+# App — offline traffic codes
 
-Flutter **Android only**. Producto y contrato: repo padre.
+Flutter **Android-only** application. Product decisions: repository root.
 
-## Comandos
+## Commands
 
 ```bash
 flutter pub get
@@ -11,13 +11,13 @@ flutter run
 flutter build apk --release
 ```
 
-Entrega piloto (desde la raíz del repo):
+Pilot build (from repo root):
 
 ```bash
 ./scripts/build-piloto.sh
 ```
 
-Con sync remoto:
+With remote sync:
 
 ```bash
 CATALOGO_URL='https://…/catalogo.json' \
@@ -25,4 +25,4 @@ USUARIOS_URL='https://…/usuarios.json' \
 ./scripts/build-piloto.sh
 ```
 
-Ver `../docs/entrega-piloto.md` y `../docs/sync.md`.
+See `../docs/entrega-piloto.md`, `../docs/sync.md`, and `../docs/data-hosting.md`.

@@ -1,20 +1,20 @@
-# Decisiones arquitectónicas (ADR)
+# Architectural decision records (ADR)
 
-Cuando una decisión del contrato sea demasiado larga o técnica para el formato corto de `CONTRATO.md`, se documenta aquí como ADR y se enlaza desde el contrato (ej. `D-018` → `0001-base-de-datos.md`).
+When a contract decision is too long for the short format in `CONTRATO.md`, document it here and link from the contract (e.g. `D-018` → `0001-database.md`).
 
-## Formato sugerido de cada ADR
+## Suggested ADR format
 
 ```markdown
-# ADR-XXXX — Título
+# ADR-XXXX — Title
 
-- Estado: Propuesto | Aceptado | Deprecado | Reemplazado por ADR-YYYY
-- Fecha:
-- Contrato relacionado: D-XXX
+- Status: Proposed | Accepted | Deprecated | Replaced by ADR-YYYY
+- Date:
+- Related contract id: D-XXX
 
-## Contexto
-## Decisión
-## Consecuencias
-## Alternativas consideradas
+## Context
+## Decision
+## Consequences
+## Alternatives considered
 ```
 
-Por ahora no hay ADRs: el proyecto está en ideación.
+Most decisions currently fit in `CONTRATO.md`; this folder is reserved for deeper write-ups.

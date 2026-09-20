@@ -1,15 +1,15 @@
 # Hosting samples (public app repo)
 
-This folder holds **templates only** for the public portfolio repository.
+**Templates only** for the public portfolio repository.
 
 | File | Purpose |
 | --- | --- |
-| `catalogo.ejemplo.json` | Schema sample for the infraction catalog |
-| `usuarios.ejemplo.json` | Schema sample for agents (username + password) |
+| `catalogo.ejemplo.json` | Infraction catalog schema sample |
+| `usuarios.ejemplo.json` | Agents schema sample (username + password) |
 
-**Production JSON is NOT here.**
+**Production JSON is not stored here.**
 
-Production files live in a **private** GitHub repo that deploys to **Cloudflare Pages**:
+Production files live in the **private** GitHub repo that deploys to **Cloudflare Pages**:
 
 ```text
 (private) codigos-transito-data
@@ -22,4 +22,7 @@ Production files live in a **private** GitHub repo that deploys to **Cloudflare 
         ▼ CATALOGO_URL / USUARIOS_URL baked into the APK
 ```
 
-See `docs/sync.md` and `docs/data-hosting.md`.
+Public app: https://github.com/marin1321/offline-traffic-codes  
+Private data: https://github.com/marin1321/codigos-transito-data  
+
+Details: `docs/data-hosting.md`.

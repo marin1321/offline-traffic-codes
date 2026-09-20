@@ -1,18 +1,25 @@
-# Documentación
+# Documentation index
 
-Fuente de decisiones: [`../CONTRATO.md`](../CONTRATO.md).
+Binding decisions live in [`../CONTRATO.md`](../CONTRATO.md) (English).  
+In-app UI language for agents remains **Spanish**.
 
-| Documento | Contenido |
+| Document | Contents |
 | --- | --- |
-| [vision.md](./vision.md) | Problema y valor |
-| [alcance.md](./alcance.md) | MVP |
+| [vision.md](./vision.md) | Problem and value |
+| [alcance.md](./alcance.md) | MVP scope |
 | [stack.md](./stack.md) | Flutter / Android |
-| [distribucion.md](./distribucion.md) | APK |
-| [fases.md](./fases.md) | **Plan de build** |
-| [auth.md](./auth.md) | Auth híbrida + device_id (**decidido**) |
-| [dev-setup.md](./dev-setup.md) | Emulador y teléfono físico |
-| [sync.md](./sync.md) | Sync híbrido F4 |
-| [data-hosting.md](./data-hosting.md) | Repo privado + Cloudflare Pages |
-| [entrega-piloto.md](./entrega-piloto.md) | **Entrega e instalación al piloto** |
-| [contenido-ejemplo.md](./contenido-ejemplo.md) | Muestra A/B/C |
-| [decisiones/](./decisiones/) | ADRs |
+| [auth.md](./auth.md) | Username login + device binding |
+| [sync.md](./sync.md) | Hybrid offline/online JSON |
+| [data-hosting.md](./data-hosting.md) | Private repo + Cloudflare Pages |
+| [distribucion.md](./distribucion.md) | APK sideload |
+| [dev-setup.md](./dev-setup.md) | Emulator / device |
+| [fases.md](./fases.md) | Delivery phases F0–F5 |
+| [entrega-piloto.md](./entrega-piloto.md) | Pilot install & enrollment |
+| [contenido-ejemplo.md](./contenido-ejemplo.md) | Sample catalog shape |
+| [decisiones/](./decisiones/) | Optional long ADRs |
+
+## Convention
+
+- Narrative / how-to → `docs/` (English for portfolio readers)
+- Binding yes/no decisions → `CONTRATO.md`
+- If they conflict, the contract wins

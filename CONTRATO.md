@@ -1,504 +1,435 @@
-# Contrato del proyecto
+# Project contract
 
-> Documento vivo. Aquí registramos **qué** decidimos, **por qué**, y **qué queda pendiente**.
-> Nada se da por hecho hasta que aparezca en este archivo con estado **Decidido**.
-> Lo construimos entre los dos: cada decisión se propone, se discute y se cierra aquí antes de implementarla.
+> Living document. We record **what** we decided, **why**, and **what is still open**.
+> Nothing is assumed until it appears here with status **Decided**.
+> We build this together: propose → discuss → close here before implementing.
 
-**Última actualización:** 2026-09-19  
-**Estado general:** **v1 software completa (F0–F5).** Sesión diaria (D-036). Contenido/enrolamiento en operación.
+**Last updated:** 2026-09-19  
+**Overall status:** v1 software complete (F0–F5). Daily session (D-036). Username login (D-037). Data on private repo + Cloudflare Pages (D-038).
 
 ---
 
-## 1. Cómo usamos este contrato
+## 1. How we use this contract
 
-| Regla | Descripción |
+| Rule | Description |
 | --- | --- |
-| Fuente de verdad | Si hay duda entre conversación y este archivo, manda este archivo. |
-| Decisiones | Toda decisión de producto, arquitectura, stack o proceso se anota aquí. |
-| Estados | `Propuesto` → `En discusión` → `Decidido` → `Revisar` (si hay que reabrir). |
-| Cambios | No se borra historia: se marca la decisión anterior y se añade la nueva con fecha. |
-| Implementación | Solo se implementa lo que esté **Decidido**. Lo demás se planifica, no se construye. |
-| Fases | Las fases de desarrollo se definen **después** de cerrar el contrato base (secciones 2–7). |
+| Source of truth | If conversation and this file disagree, **this file** wins. |
+| Decisions | Product, architecture, stack, and process decisions are logged here. |
+| States | `Proposed` → `In discussion` → `Decided` → `Revisit` (if reopened). |
+| History | Do not erase history: mark the old decision and add the new one with a date. |
+| Implementation | Only implement what is **Decided**. |
+| Phases | Build phases come **after** the base contract is closed (then `docs/fases.md`). |
 
-### Formato de cada decisión
+### Decision format
 
 ```
-### D-XXX — Título corto
-- **Estado:** Propuesto | En discusión | Decidido | Revisar
-- **Fecha:** YYYY-MM-DD
-- **Decisión:** qué se eligió (o se propone)
-- **Motivo:** por qué
-- **Alternativas descartadas:** (si aplica)
-- **Implicaciones:** qué habilita o bloquea
+### D-XXX — Short title
+- **Status:** Proposed | In discussion | Decided | Revisit
+- **Date:** YYYY-MM-DD
+- **Decision:** what was chosen
+- **Rationale:** why
+- **Rejected alternatives:** (if any)
+- **Implications:** what it enables or blocks
 ```
 
 ---
 
-## 2. Visión y problema
+## 2. Vision and problem
 
-### D-001 — Nombre de trabajo del proyecto
-- **Estado:** Propuesto
-- **Fecha:** 2026-09-19
-- **Decisión:** Nombre de trabajo: **Códigos de Tránsito** (carpeta `Codigos_Transito`). Nombre comercial / final pendiente.
-- **Motivo:** Anclar el repositorio mientras definimos marca.
-- **Implicaciones:** Puede renombrarse sin costo hasta que exista marca pública.
+### D-001 — Working name
+- **Status:** Proposed
+- **Date:** 2026-09-19
+- **Decision:** Working name **Códigos de Tránsito** / public repo `offline-traffic-codes`. Final product name TBD.
+- **Rationale:** Anchor the repository while branding is open.
 
-### D-002 — Problema que resolvemos
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** En el momento de levantar o revisar un **comparendo**, el **agente de tránsito** necesita saber **qué código de infracción aplica** y **qué significa**, de forma rápida y clara — a menudo en campo **sin internet confiable**.
-- **Motivo:** Uso operativo real del rol primario.
-- **Implicaciones:** UX orientada a “encuentro el código y lo entiendo”, no a trámites ni estudio académico.
+### D-002 — Problem we solve
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** When issuing or reviewing a **comparendo** (traffic citation), a **traffic officer** needs the correct **infraction code** and meaning quickly—often **without reliable internet**.
+- **Implications:** UX optimizes for “find the code and understand it,” not full legal procedure or payments.
 
-### D-003 — Propuesta de valor (una frase)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** **Para agentes de tránsito que necesitan el código correcto de una infracción al elaborar un comparendo, Códigos de Tránsito es una app móvil experimental de consulta offline (catálogo en el dispositivo) con listado por categoría y búsqueda por código o descripción.**
-- **Motivo:** Rol primario cerrado + naturaleza experimental.
-- **Implicaciones:** Filtro duro contra features de producto masivo / stores.
+### D-003 — Value proposition
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** **For traffic officers who need the correct infraction code when writing a citation, this is an experimental offline-first mobile consultation app: catalog on device, categories, search by code or description.**
+- **Implications:** Hard filter against mass-market / store features in v1.
 
 ---
 
-## 3. Usuarios y contexto
+## 3. Users and context
 
-### D-004 — Usuarios objetivo
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:**
-  - **Único rol de la app:** **Agente de tránsito**.
-  - **Usuario piloto:** el padre del promotor (agente de tránsito). La v1 se construye **para él**.
-  - **Expansión posible:** si compañeros se interesan, se les puede armar un instalable **personalizado** (credenciales en JSON de esa build). No hay roles distintos (admin, conductor, etc.).
-  - **No hay** multi-rol, permisos granulares ni perfiles de “tipo de usuario” en la app.
-- **Motivo:** Confirmación explícita; producto experimental de un solo rol.
-- **Implicaciones:** UI y copy en segunda persona operativa de agente; no pantallas de gestión de flotas ni público general.
+### D-004 — Target users
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:**
+  - **Only role:** traffic officer / agent.
+  - **Pilot user:** promoter’s father (traffic officer). v1 is built for him.
+  - **Possible expansion:** colleagues get a customized install (credentials in that build’s user JSON). No multi-role admin UI.
+- **Implications:** Operational copy; no fleet back-office.
 
-### D-005 — Geografía y marco legal
-- **Estado:** Decidido (marco); detalle de fuente en D-023
-- **Fecha:** 2026-09-19
-- **Decisión:** **Colombia.** Catálogo tipo `A.01`, `B.03`, `C.28` por categorías A, B, C, …
-- **Implicaciones:** No multi-país en v1.
+### D-005 — Geography / legal frame
+- **Status:** Decided (frame); source detail in D-023
+- **Date:** 2026-09-19
+- **Decision:** **Colombia.** Codes like `A.01`, `C.28` by letter categories.
+- **Implications:** No multi-country in v1.
 
-### D-006 — Idioma(s) del producto
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** **Español** únicamente en v1.
+### D-006 — Product language
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** **Spanish** for the in-app UI and agent-facing copy. **English** for public portfolio docs (this contract, README, `docs/`).
+- **Rationale:** Agents work in Spanish; portfolio readers expect English.
 
-### D-033 — Naturaleza del proyecto (experimental / personalizado)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Proyecto **experimental y personalizado**, no producto de tienda masiva.
-  - Un piloto principal; instalaciones puntuales a terceros si se acuerda.
-  - Posible cobro simbólico (“unos pesitos”) por armar credenciales + APK a un compañero: es un **acuerdo manual** entre personas, no un sistema de pagos in-app.
-  - Contenido de infracciones relativamente **estable** (cambia en años, no cada semana) → razonable “quemar” datos en la app o actualizar de forma poco frecuente.
-- **Motivo:** Definición explícita del alcance social y comercial del piloto.
-- **Implicaciones:** Sin Play Store / App Store (D-020). Auth vía JSON híbrido + device_id (D-019). Priorizar simplicidad extrema.
+### D-033 — Project nature (experimental / custom)
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** Experimental, customized app—not a mass store product. Optional small fee for hand-built installs is **outside** the app. Infraction content is relatively stable (years, not weeks).
+- **Implications:** No Play/App Store (D-020). Prefer extreme simplicity.
 
 ---
 
-## 4. Alcance del producto
+## 4. Product scope
 
-### D-007 — Qué es el producto (tipo)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** App móvil de **consulta** de manual de infracciones (código + descripción), categorías, filtros y búsqueda. Experimental, un rol (agente).
+### D-007 — Product type
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** Mobile **consultation** app: infraction manual (code + description), categories, filters, search. Experimental, single role.
 
-### D-008 — MVP (mínimo viable)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** El agente piloto debe poder:
-  1. Instalar la app en su teléfono (**Android vía APK** como camino principal; ver D-015/D-020).
-  2. Entrar con **usuario + contraseña** validadas contra un **JSON interno** de la build (D-019).
-  3. Ver listado de infracciones por **categoría**.
-  4. **Filtrar** por categoría.
-  5. **Buscar** por código (tolerante a formato) y por texto en la descripción.
-  6. Abrir **detalle** (código + descripción).
-  7. Usar todo lo anterior **offline**.
-  8. Si hay internet, puede **actualizar el catálogo** desde el JSON remoto (D-023); sin internet usa la copia local/seed.
-- **Demo de humo:** modo avión → “resonador” → **C.28** legible.
+### D-008 — MVP
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** Pilot agent can:
+  1. Install on Android via **APK** sideload.
+  2. Sign in with **username + password** against hybrid users JSON (D-019 / D-037).
+  3. Browse infractions by **category**.
+  4. **Filter** by category.
+  5. **Search** by code (format-tolerant) and description text.
+  6. Open **detail** (description + optional `referencias`).
+  7. Use all of the above **offline**.
+  8. With internet, optionally **refresh** catalog/users from static HTTPS JSON (D-023).
+- **Smoke demo:** airplane mode → search “resonador” → **C.28**.
 
-### D-009 — Fuera de alcance (v1)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** **No** entra en v1:
-  - Publicación en Play Store / App Store
-  - Backend de usuarios, registro self-service, recuperación de contraseña elaborada
-  - Pagos in-app / pasarelas
-  - Pago de multas, SIMIT, RUNT, emisión de comparendos
-  - Chat / IA
-  - Mapas, GPS, fotomultas
-  - Multi-país / multi-idioma
-  - Varios roles o panel admin web
-  - Edición del catálogo desde la app por el agente
-  - Campos extra de infracción (sanciones, SMMLV, etc.) — ver D-028
-  - **iOS / iPhone** como plataforma soportada (sin Apple Developer ni PWA de soporte)
-- **Implicaciones:** Personalización de usuarios = editar JSON y regenerar/repartir instalable (o mecanismo mínimo equivalente).
+### D-009 — Out of scope (v1)
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** Not in v1:
+  - Play Store / App Store public listing
+  - User self-registration backend, fancy password recovery
+  - In-app payments
+  - Official fine payment, SIMIT, RUNT, electronic citation issuance
+  - Chat / AI
+  - Maps, GPS, speed cameras
+  - Multi-country / multi-language UI
+  - Multiple in-app roles or web admin CMS
+  - End-user editing of the catalog
+  - Extra fine fields (SMMLV amounts, etc.) unless later agreed
+  - **iOS** as a supported platform (no Apple Developer account)
+- **Implications:** User personalization = edit JSON + redistribute APK and/or publish remote users JSON.
 
-### D-010 — Criterios de éxito
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Éxito del piloto =
-  1. El **agente piloto** (padre) puede, en campo y **sin red**, encontrar el código que necesita para el comparendo en poco tiempo.
-  2. Búsqueda por código y por palabras de la descripción es usable en la práctica.
-  3. Instalación en su Android por **APK** sin tienda.
-  4. Login simple con su cédula/clave funciona sin servidor.
-- No se exigen métricas de producto masivo ni retención de miles de usuarios.
+### D-010 — Success criteria
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** Pilot success =
+  1. Pilot officer finds needed codes in the field **without network**.
+  2. Code + keyword search is usable in practice.
+  3. Android APK install without a store.
+  4. Local login works without a server.
+- No mass-market retention metrics required.
 
-### D-028 — Modelo de contenido (infracción)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Solo lo necesario para buscar y entender:
-  | Campo | Ejemplo |
+### D-028 — Content model (infraction)
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** Minimum fields:
+
+  | Field | Example |
   | --- | --- |
   | `codigo` | `C.28` |
   | `categoria` | `C` |
-  | `categoria_titulo` | `Infracciones de mayor cuantía ordinaria` |
-  | `descripcion` | texto de la infracción |
-| `referencias` | lista de strings, ej. `Art. 131`, `Res. 20` (opcional) |
-- **Opcional:** `referencias` puede ir vacía o ausente. Se muestra en el detalle al tocar el código.
-- **Sin otros campos por ahora** (ni valor en salarios, ni keywords obligatorias). Si más adelante la búsqueda lo pide, se puede añadir `keywords`.
-- **Quién llena el catálogo:** el promotor del producto, a mano, en JSON (se demora; es aceptable).
-- **Implicaciones:** Schema en `docs/contenido-ejemplo.md` y `app/assets/data/README.md`.
+  | `categoria_titulo` | category title |
+  | `descripcion` | body text |
+  | `referencias` | optional list, e.g. `Art. 131`, `Res. 20` |
 
-### D-029 — Organización UX del catálogo
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Listado + categorías + filtro + búsqueda + detalle simple.
+- Shown in the **detail** sheet when tapping a code.
+- Catalog author: promoter, manual JSON (patient fill-in is OK).
 
-### D-030 — Requisitos de búsqueda
-- **Estado:** Decidido (comportamiento)
-- **Fecha:** 2026-09-19
-- **Decisión:** Búsqueda offline por código normalizado y por texto en descripción; útil en campo (ej. “resonador” → C.28). Sin IA.
+### D-029 — Catalog UX
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** List + categories + filter + search + simple detail.
 
-### D-031 — Offline-first (requisito crítico)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** La consulta **nunca** depende de internet. Datos de infracciones en el dispositivo (seed + copia local). Internet se usa para **actualizar** el catálogo (híbrido D-023), nunca como condición para consultar.
+### D-030 — Search behavior
+- **Status:** Decided (behavior)
+- **Date:** 2026-09-19
+- **Decision:** Offline search by normalized code and description text; useful in the field (e.g. “resonador” → C.28). No AI.
 
----
-
-## 5. Principios de trabajo
-
-### D-011 — Documentación primero
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Documentación fundamental; decisiones en este contrato; narrativa en `docs/`.
-
-### D-012 — Contrato colaborativo
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Lo construimos entre los dos.
-
-### D-013 — Orden: contrato → fases → código
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Contrato base → fases → implementación.
-
-### D-014 — Transparencia de supuestos
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Supuestos marcados como tales.
-
-### D-032 — Simplicidad del producto
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Preferir lo simple y experimental. Evitar over-engineering.
+### D-031 — Offline-first (critical)
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** Consultation **never** depends on internet. Infraction data on device (seed + local copy). Internet only for **updates** when hybrid sync is configured.
 
 ---
 
-## 6. Stack y arquitectura
+## 5. Working principles
 
-### D-015 — Tipo de aplicación y plataformas
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:**
-  - **Única plataforma soportada: Android.**
-  - Entrega: **APK** por sideload (sin Play Store).
-  - **Usuario que importa:** el padre del promotor (agente, Android). Cómo se instale le da igual mientras funcione; el canal elegido es APK.
-  - **iOS: fuera de alcance.** No se pagará cuenta Apple Developer. Compañeros con iPhone **no son objetivo** del producto (“opcional / no prioritario / no se soporta”).
-  - Play Store / App Store: fuera de alcance (D-020).
-- **Motivo:** Confirmación explícita del promotor (2026-09-19): foco total en el piloto Android; iPhone no justifica costo ni complejidad.
-- **Historia:** Se consideró iOS por compañeros; se descartó al no haber Apple Developer ni prioridad de negocio.
-- **Implicaciones:** Stack y QA solo Android. Reabrir solo con nueva decisión explícita en este contrato.
+### D-011 — Documentation first
+- **Status:** Decided
+- **Decision:** Documentation is mandatory. Binding decisions live here; narrative in `docs/`.
 
-### D-016 — Frontend / framework móvil
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** **Flutter** (lenguaje **Dart**).
-- **Motivo (delegado al co-diseño; el promotor no tenía preferencia de lenguaje):**
-  - Objetivo claro = **APK Android** usable para el piloto.
-  - UI de listas, filtros y búsqueda offline es un caso natural de Flutter.
-  - Generación de APK madura (`flutter build apk`).
-  - Buena productividad para un producto simple experimental.
-  - iOS no se soporta (D-015); no se eligió Flutter “para dual-plataforma”, sino por solidez del APK y del modelo de app. (Kotlin nativo era alternativa válida; se prefirió Flutter por DX de UI y velocidad de MVP.)
-- **Alternativas descartadas:**
-  - Expo/RN: equivalente técnico; sin preferencia JS no aportaba ventaja.
-  - PWA: innecesaria si el piloto acepta APK y iOS está fuera.
-  - Kotlin-only: válida en Android-only; descartada en favor de Flutter por decisión de co-diseño.
-  - Capacitor / KMP: sin beneficio extra aquí.
-- **Implicaciones:** Toolchain Flutter + Android SDK. Proyecto(s) bajo convenciones Flutter. Detalle en `docs/stack.md`.
+### D-012 — Collaborative contract
+- **Status:** Decided
+- **Decision:** Built together; closed with promoter confirmation and a log entry here.
 
+### D-013 — Order: contract → phases → code
+- **Status:** Decided
+- **Decision:** 1) Base contract 2) Phases 3) Implementation.
+
+### D-014 — Transparent assumptions
+- **Status:** Decided
+- **Decision:** Assumptions are labeled as such.
+
+### D-032 — Product simplicity
+- **Status:** Decided
+- **Decision:** Prefer simple/experimental solutions that meet the MVP. Avoid over-engineering.
+
+---
+
+## 6. Stack and architecture
+
+### D-015 — App type and platforms
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:**
+  - **Only supported platform: Android.**
+  - Delivery: **APK** sideload (no Play Store).
+  - **iOS: out of scope** (no Apple Developer spend; colleagues on iPhone are not a target).
+- **History:** iOS was considered; dropped by explicit choice.
+
+### D-016 — Framework
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** **Flutter** (Dart).
+- **Rationale:** Language preference delegated; solid APK path; lists/search/offline fit well. Not chosen “for iOS dual-platform.”
+- **Rejected:** Expo/RN (no JS preference), PWA (APK preferred), Kotlin-only (Flutter won on DX).
 
 ### D-017 — Backend / API
-- **Estado:** Decidido (MVP)
-- **Fecha:** 2026-09-19
-- **Decisión:** **Sin backend de aplicación en el MVP.** No hay API de login con lógica de servidor ni base de datos de app. Auth y catálogo = JSON (local + estáticos en hosting: D-023, D-035). Eso **no** es un backend (sin escritura desde la app, sin DB).
-- **Motivo:** Experimental, simplicidad.
-- **Implicaciones:** Hospedar archivo(s) estático(s) de catálogo y de usuarios. Altas/bajas de usuarios = editar JSON remoto, no nuevo APK.
+- **Status:** Decided (MVP)
+- **Date:** 2026-09-19
+- **Decision:** **No application backend.** No login API or app database. Auth + catalog = JSON (local + optional static HTTPS files). That is **not** a backend (no write API from the app).
+- **Implications:** Host static file(s). User add/remove = edit remote JSON, not a new APK (when hybrid is live).
 
-### D-018 — Datos y persistencia local
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:**
-  - **Catálogo:** JSON híbrido D-023.
-  - **Usuarios:** JSON híbrido D-035 (cédula, clave, activo, device_ids[]).
-  - Runtime: copias locales de ambos; fuentes JSON editables por el promotor.
-  - Búsqueda de catálogo en memoria (FTS solo si hace falta).
-- **Motivo:** JSON + sync sin backend.
-- **Implicaciones:** Dos URLs/archivos. APK genérico; no hace falta rebuild por alta de usuario.
+### D-018 — Local data
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:**
+  - Catalog: hybrid JSON (D-023).
+  - Users: hybrid JSON (D-035) with `usuario`, password, `activo`, `device_ids[]`.
+  - In-memory search is enough for typical catalog size (FTS later if needed).
+- **Implications:** Two files/URLs. Generic APK possible.
 
-### D-019 — Auth e identidad
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:**
-  - Login: **usuario + contraseña + device_id** de la instalación (D-034). **Sin IP.**
-  - Lista de usuarios: **JSON híbrido** (D-035) — el promotor agrega/revoca/edita sin nuevo APK.
-  - Un solo rol (agente). Sin admin in-app. Sin backend de escritura (edición manual del JSON + upload).
-  - Pestillo **experimental**, no seguridad bancaria.
-  - Enrolamiento **manual**: el agente envía el código del teléfono al promotor; el promotor lo carga en `device_ids` (D-034).
-  - Un usuario **puede tener varios teléfonos** (`device_ids` con múltiples entradas).
-- **Forma ilustrativa (no real):**
+### D-019 — Auth and identity
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:**
+  - Login: **username + password + device_id** (D-034, D-037). **No IP.**
+  - Users list: **hybrid JSON** (D-035)—promoter adds/revokes/edits without a new APK when remote is configured.
+  - Single role (agent). No in-app admin. No write backend (manual JSON + upload).
+  - **Experimental** gate, not bank-grade security.
+  - **Manual enrollment:** agent sends phone code to promoter; promoter adds it to `device_ids`.
+  - **Multiple phones per user** allowed (`device_ids` array).
+- **Illustrative shape (not real credentials):**
   ```json
   {
-    "version": 3,
+    "version": 5,
     "usuarios": [
       {
-        "usuario": "1234567890",
-        "password": "clave-simple",
-        "nombre": "Agente piloto",
+        "usuario": "oscar",
+        "password": "simple-password",
+        "nombre": "Pilot agent",
         "activo": true,
-        "device_ids": ["uuid-tel-1", "uuid-tel-2"]
+        "device_ids": ["uuid-phone-1", "uuid-phone-2"]
       }
     ]
   }
   ```
-  - `activo: false` o sin usuario = revocado.
-  - `device_ids` vacío = aún no enrolado → no entra hasta que el promotor cargue al menos un id.
-- **Motivo:** OK explícito del promotor (híbrido, device_id, enrolamiento manual, multi-dispositivo).
-- **Historia:** Empezó como JSON solo embebido cédula+clave; reabierto y cerrado el mismo ciclo con híbrido + device binding.
-- **Implicaciones:** APK genérico viable. Ver D-034, D-035, `docs/auth.md`.
+- **History:** Started as embedded cédula+password JSON; reopened to hybrid + device binding; then **username** instead of national ID (D-037).
 
+### D-037 — Login identifier: username (not national ID)
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** Login uses field **`usuario`** (e.g. `admin`, `oscar`) + password. **No cédula** or other government ID in the app.
+- **Rationale:** Less sensitive PII in the users JSON; simpler ops; cleaner portfolio story.
+- **Implications:** Case-insensitive username match. Spanish UI label «Usuario».
 
-### D-037 — Identificador de login: usuario (no cédula)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** El login usa un campo **`usuario`** (ej. `admin`, `oscar`) + contraseña. **No** se usa cédula ni otro documento de identidad en la app.
-- **Motivo:** Menos dato personal sensible en el JSON de usuarios; más simple de operar y de mostrar en portfolio sin PII de documentos.
-- **Implicaciones:** Schema `usuarios.json` con `usuario`. Matching case-insensitive. UI en español: etiqueta «Usuario».
+### D-034 — Bind credentials to device
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:**
+  - **Do not use IP.**
+  - **Do use** an installation UUID stored on first launch.
+  - No required IMEI.
+  - Login rule: username + password OK, `activo == true`, and local `device_id` ∈ `device_ids`.
+  - Multiple phones per user allowed.
+  - Manual enrollment without a write API (WhatsApp the code → edit JSON → publish).
+  - **Debug builds** may relax device binding for developer testing; **release** stays strict.
+- **Limits:** Not anti-forensics; same physical phone shared is indistinguishable; owning the remote JSON bypasses the gate.
 
-### D-036 — Caducidad de sesión (login diario)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** La sesión no es indefinida. Tras un login exitoso, vale solo el **día calendario local** del dispositivo. Al día siguiente (desde las 00:00 locales), al abrir la app se exige login otra vez.
-- **Motivo:** Pedido del promotor.
-- **Implicaciones:** Se guarda la fecha local del último login (yyyy-MM-dd). Mismo día: no pide login al reabrir. Cruzar medianoche: sí. Siguen revocación y device.
-- **No es:** TTL de 24 horas exactas desde el login; es día calendario.
+### D-035 — Hybrid auth JSON (offline/online)
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** Same family as D-023 for **users**:
+  1. Local seed / cache.
+  2. With network: GET remote `usuarios.json` (`version`); replace local if newer.
+  3. Offline: login against last local copy.
+  4. Separate file/URL from the catalog.
+  5. **R1/R2 offline revoke policies not required** (promoter said they do not matter). Optional best-effort refresh on open/login is enough.
+- **Accepted limit:** a revoked user who never syncs again may keep an old local copy.
 
-### D-038 — Hosting de datos (portfolio vs operaciones)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:**
-  - **Repo público (portfolio):** código Flutter, docs, seeds de demo. Sin contraseñas reales ni cédulas.
-  - **Repo privado de datos:** `catalogo.json` + `usuarios.json`.
-  - **Cloudflare Pages:** despliegue HTTPS desde el repo privado (`git push` → publish).
-- **Motivo:** Credibilidad de portfolio + no exponer JSON de agentes en repos públicos.
-- **Implicaciones:** `.gitignore` excluye `hosting/usuarios.json` / `catalogo.json` de producción; solo `*.ejemplo.json` en público. Ver `docs/data-hosting.md`.
+### D-036 — Session expiry (daily login)
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** Session is **not** indefinite. After a successful login it is valid only for the device’s **local calendar day**. From the **next day** (local midnight onward), opening the app requires login again.
+- **Rationale:** Promoter request—do not leave session open forever until revoke.
+- **Implications:** Store local login date `yyyy-MM-dd`. Same day reopen: no login. After midnight: login. Revoke / device removal still apply on restore.
+- **Not:** a rolling 24-hour TTL from login time; it is **calendar day**.
 
-### D-020 — Hosting, distribución e instalación
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:**
-  - **No** Play Store, **no** App Store, **no** canal iOS.
-  - **Único instalable:** **APK Android** (Flutter release/sideload).
-  - Reparto: WhatsApp, Drive, cable u otro medio humano.
-  - El piloto no exige un modo de instalación concreto; se estandariza en APK por simplicidad operativa.
-  - **Hosting del catálogo:** archivo(s) JSON estático(s) para sync híbrido (D-023). Hosting concreto se fija en implementación/fases (p. ej. GitHub Pages/raw u otro estático).
-- **Motivo:** Foco en el padre (Android); sin Apple Developer; iOS fuera (D-015).
-- **Implicaciones:** Alta/baja de usuarios y device ids ⇒ JSON remoto de usuarios, **sin** nuevo APK. Lógica de app ⇒ nuevo APK. Catálogo ⇒ JSON remoto (D-023).
-- **Hosting:** URL catálogo + URL **usuarios** (D-035). URL de usuarios poco adivinable si se puede; no es secreto criptográfico.
+### D-020 — Hosting, distribution, install
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:**
+  - No public Play Store / App Store as the product channel.
+  - Only installable: **Android APK** (Flutter release / sideload).
+  - Human distribution (WhatsApp, Drive, cable…).
+  - Catalog hosting: static JSON URL(s) for hybrid sync (D-023).
+- **Implications:** Auth/user/device changes → remote JSON when hybrid is live. App logic changes → new APK.
 
-### D-021 — IA / automatización
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Sin IA en v1.
+### D-038 — Data hosting (portfolio vs operations)
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:**
+  - **Public repo (portfolio):** Flutter app, docs (English), demo seeds only. No real passwords or national IDs.
+  - **Private data repo:** real `catalogo.json` + `usuarios.json`.
+  - **Cloudflare Pages:** HTTPS deploy from the private repo (`git push` → publish).
+- **Rationale:** Portfolio credibility + do not expose agent JSON on public repos.
+- **Implications:** Public `.gitignore` excludes production hosting JSON; only `*.ejemplo.json` samples. See `docs/data-hosting.md`.
+- **Repos:**  
+  - Public: `https://github.com/marin1321/offline-traffic-codes`  
+  - Private: `https://github.com/marin1321/codigos-transito-data`
 
-### D-023 — Fuente y actualización del catálogo (JSON)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Estrategia **C — híbrido desde el día 1**.
-  1. La app **incluye un catálogo seed** (JSON embebido o copiado al almacén local en el primer arranque) → **offline inmediato** tras instalar.
-  2. Si hay **internet**, la app puede **consultar un JSON estático** en una URL configurada (versionado con campo `version` o equivalente).
-  3. Si el remoto es más nuevo (o el local está vacío/corrupto), se **descarga y reemplaza la copia local**.
-  4. Si no hay red o falla la descarga, se sigue con la **última copia local** sin bloquear la consulta.
-  5. El promotor **llena y publica** el JSON (a mano, con paciencia); no hace falta API ni base de datos.
-  6. Hosting del archivo: estático simple (ej. GitHub raw/Pages, Cloudflare R2, S3 público, Firebase Hosting, etc. — se elige al implementar; no es “backend de app”).
-- **Motivo:** Confirmación explícita del usuario. El catálogo se irá completando con el tiempo; el híbrido evita reinstalar el APK del piloto (y de eventuales androides) por cada tanda de códigos.
-- **Alternativas descartadas para v1:** solo embebido sin sync (A); backend gordo.
-- **Implicaciones:** Catálogo = “local + GET”. El JSON de **usuarios es otro archivo/URL** (D-035), nunca mezclado con el de infracciones. Catálogo = no secreto (normativa).
+### D-021 — AI
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** No AI in v1.
 
-### D-034 — Vínculo credenciales ↔ dispositivo (anti uso en otro teléfono)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:**
-  - **No usar IP** como factor de login.
-  - **Sí:** ID de instalación (**UUID** generado y persistido por la app en ese teléfono al primer arranque).
-  - **No** IMEI como requisito.
-  - Regla de login: usuario + contraseña correctas, `activo == true`, y el `device_id` local ∈ `device_ids` del usuario.
-  - **Varios teléfonos por usuario permitidos:** `device_ids` es una lista; el promotor puede registrar más de un aparato para la misma cédula/clave.
-  - **Enrolamiento manual (sin backend de escritura):**
-    1. Promotor crea usuario (cédula, clave, `activo: true`, `device_ids` puede empezar vacío o ya con ids conocidos).
-    2. Agente instala APK; la app muestra el **código de este teléfono**.
-    3. Se lo envía al promotor (p. ej. WhatsApp).
-    4. Promotor **añade** ese id a `device_ids` (sin borrar otros si ya había) y publica el JSON.
-    5. Agente sincroniza usuarios (con red) y puede entrar.
-  - **Quitar un teléfono:** el promotor elimina ese id de la lista (los demás siguen válidos).
-  - **Revocar usuario entero:** `activo: false` o borrar el usuario.
-- **Límites conscientes:** no es antimafia; mismo teléfono físico compartido no se distingue; clonar datos de app o editar JSON remoto bypassea el pestillo.
-- **Motivo:** OK explícito del promotor.
-
-### D-035 — Auth híbrida offline/online (JSON de usuarios)
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:**
-  1. Seed local (vacío o fixtures de dev / piloto de emergencia).
-  2. Con internet: GET de `usuarios.json` remoto (`version`); si más nuevo, reemplaza copia local.
-  3. Sin internet o fallo: login contra **última copia local** (cédula + clave + device_id).
-  4. Alta/baja/edición de device_ids: el promotor sube JSON nuevo — sin nuevo APK.
-  5. Archivo/URL de usuarios **separado** del catálogo de infracciones.
-  6. **Políticas R1/R2 de revocación offline: no se exigen.** El promotor indicó que no importan. Comportamiento suficiente:
-     - Cuando haya red, la app **puede/debe intentar** refrescar usuarios en algún momento natural (arranque o login) de forma simple, sin diseñar TTL ni bloqueo agresivo.
-     - Se acepta el límite: un revocado con copia local vieja y sin volver a sincronizar puede seguir entrando offline hasta que sincronice o reinstale.
-- **Seguridad:** JSON con cédulas/claves = sensible a nivel archivo/URL; nivel experimental (D-025).
-- **Motivo:** OK explícito; simplicidad sobre kill-switch offline.
-
-
----
-## 7. Calidad, legal y restricciones
-
-### D-022 — Naturaleza de la información legal
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Informa y orienta; no es asesoría legal ni sustituye la norma oficial. Disclaimer visible.
-
-### D-024 — Pruebas y calidad mínima
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:** Antes de llamar “listo el piloto” a una entrega:
-  1. **Humo funcional** (emulador o dispositivo): login, listado, filtro por categoría, búsqueda, detalle.
-  2. **Casos de búsqueda:** `C.28` / `c28`, texto “resonador”, al menos un código de categoría A y uno de B del seed.
-  3. **Modo avión:** lista, filtro, búsqueda y detalle operativos con el catálogo local/seed; login con copia local de usuarios **si** el device ya está enrolado.
-  4. **Sync catálogo (con red):** versión remota más nueva actualiza local; fallo de red no rompe consulta.
-  5. **Auth:** device no listado → rechazo; `activo: false` en copia usada → rechazo; misma clave en device no autorizado → rechazo; multi-device del mismo usuario OK si ambos ids están en la lista; con red, intentar refresh de usuarios en arranque/login (sin TTL R2).
-  6. **APK real:** instalación del `.apk` en un Android de prueba/piloto.
-- **No exigido en v1:** cobertura de tests automatizados al 100 %, CI compleja, pruebas en iOS.
-- **Motivo:** Cerrar definición de hecho alineada al MVP experimental.
-
-### D-025 — Privacidad y datos personales
-- **Estado:** Decidido (nivel experimental)
-- **Fecha:** 2026-09-19
-- **Decisión:**
-  - Datos de acceso: **cédula, contraseña, device_id de instalación**, nombre opcional.
-  - Con auth híbrida: el JSON de usuarios vive también en **hosting** (lectura por la app). No es un “servidor de perfiles” con lógica; es un archivo. Igual implica cédulas/claves fuera del teléfono → tratar URL y repo con cuidado.
-  - En el dispositivo: device_id local + copia cacheada de usuarios + sesión.
-  - No se piden placas, fotos ni datos de infractores.
-  - **No** se usa IP como identificador.
-  - Nivel: **bajo / experimental** (pestillo entre agentes, no compliance fuerte).
-  - Si el alcance crece, reabrir (hashes de password, JSON no público, backend real).
-- **Implicaciones:** Transparencia con el piloto: no es app “segura”; es control de quién la usa en qué teléfono.
-
-### D-026 — Restricciones de entorno
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:**
-  - Offline-first (D-031).
-  - Experimental, piloto familiar (D-033).
-  - Android APK sin tiendas (D-020).
-  - Un desarrollador/promotor arma builds personalizadas a mano.
-  - Catálogo llenado manualmente con paciencia (D-028).
-- **Pendiente menor:** plazos deseados del piloto (si hay fecha).
+### D-023 — Catalog source and updates
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:** Strategy **C — hybrid from day one**.
+  1. App includes a **seed** catalog → offline immediately after install.
+  2. With internet, GET a static remote JSON (versioned).
+  3. If remote is newer, replace local copy.
+  4. If offline/fail, keep last local copy; consultation is never blocked.
+  5. Promoter fills and publishes JSON by hand; no API/DB required.
+  6. Hosting: static (Cloudflare Pages from private repo).
+- **Implications:** Catalog URL ≠ users URL. Catalog is non-secret (regulatory text). Users file is sensitive.
 
 ---
 
-## 8. Estructura de documentación (repo)
+## 7. Quality, legal, constraints
 
-### D-027 — Layout de docs
-- **Estado:** Decidido
-- **Fecha:** 2026-09-19
-- **Decisión:**
+### D-022 — Legal nature of content
+- **Status:** Decided
+- **Decision:** Informs and orients; not legal advice; does not replace the official statute. Visible disclaimer required.
+
+### D-024 — Minimum quality / definition of done
+- **Status:** Decided
+- **Decision:** Before calling a pilot build “ready”:
+  1. Functional smoke: login, list, category filter, search, detail.
+  2. Search cases: `C.28` / `c28`, “resonador”, sample A and B codes.
+  3. Airplane mode: list/filter/search/detail work with local catalog; login works if device already enrolled (release).
+  4. Catalog sync with network when configured; failed network does not break consultation.
+  5. Auth: unknown device rejected in release; `activo: false` rejected; multi-device OK when listed; best-effort users refresh on open/login.
+  6. Real APK install on a test/pilot Android device.
+
+### D-025 — Privacy
+- **Status:** Decided (experimental level)
+- **Decision:**
+  - Access data: **username, password, installation device_id**, optional display name.
+  - With hybrid auth, users JSON is also on hosting (read-only GET). Treat URL carefully.
+  - No plates, photos, or offender PII required.
+  - **No IP** as identifier.
+  - Level: **low / experimental** (gate among agents, not strong compliance).
+- **Implications:** Be transparent with the pilot: not a “secure” banking app.
+
+### D-026 — Environment constraints
+- **Status:** Decided
+- **Decision:** Offline-first; experimental pilot; Android APK; single promoter builds hand installs; catalog filled manually over time.
+
+---
+
+## 8. Documentation layout
+
+### D-027 — Docs layout
+- **Status:** Decided
+- **Date:** 2026-09-19
+- **Decision:**
 
 ```
 /
-├── CONTRATO.md
-├── README.md
-├── dist/                       ← APKs de prueba (gitignored)
-├── app/                        ← Flutter (Android)
-│   ├── lib/
-│   ├── assets/data/
-│   └── android/
-└── docs/
-    ├── README.md
-    ├── vision.md
-    ├── alcance.md
-    ├── stack.md
-    ├── auth.md
-    ├── distribucion.md
-    ├── fases.md
-    ├── contenido-ejemplo.md
-    └── decisiones/
+├── CONTRATO.md              ← this file (English for portfolio)
+├── README.md                ← English portfolio entry
+├── app/                     ← Flutter (Android)
+├── docs/                    ← English narrative docs
+├── hosting/                 ← examples only (*.ejemplo.json)
+└── scripts/
 ```
 
+Public portfolio docs are **English**. In-app UI remains **Spanish** for agents.
+
 ---
 
-## 9. Registro cronológico breve
+## 9. Chronological log (short)
 
-| Fecha | Evento |
+| Date | Event |
 | --- | --- |
-| 2026-09-19 | Reinicio de cero. Contrato + docs base. |
-| 2026-09-19 | Visión app consulta infracciones offline, MVP UX, sin IA. |
-| 2026-09-19 | Cierre: usuario = agente de tránsito; piloto = padre; un solo rol; experimental; auth cédula+clave vía JSON interno; sin stores; Android APK; catálogo JSON campos mínimos; sin backend MVP. |
-| 2026-09-19 | D-023 **Decidido:** catálogo híbrido C desde día 1. Debate framework en docs/stack.md. |
-| 2026-09-19 | **Cierre contrato base:** iOS fuera; **Flutter** + APK Android; D-024. → fases. |
-| 2026-09-19 | Reapertura auth (propuesta híbrida + device; no IP). |
-| 2026-09-19 | **Auth cerrada:** device_id sí; usuarios híbridos; enrolamiento manual; multi-teléfono por usuario; R1/R2 no obligatorias. |
-| 2026-09-19 | OK a fases. **F0 hecha:** app Flutter en `app/`, APK release generado. |
+| 2026-09-19 | Restart from zero. Contract + docs base. |
+| 2026-09-19 | Vision: offline consultation app; MVP UX; no AI. |
+| 2026-09-19 | User = traffic officer; pilot = father; experimental; Android APK. |
+| 2026-09-19 | Hybrid catalog C; Flutter; F0–F5 delivered. |
+| 2026-09-19 | Auth: hybrid users + device_id; multi-phone; no mandatory R1/R2. |
+| 2026-09-19 | D-036 daily calendar session. |
+| 2026-09-19 | `referencias` on infractions; detail UI. |
+| 2026-09-19 | D-037 username login (not cédula). D-038 private data + Cloudflare Pages. Public docs English. |
+| 2026-09-19 | Repos: `offline-traffic-codes` (public), `codigos-transito-data` (private). |
 
 ---
 
-## 10. Próximos pasos de planificación
+## 10. Next steps (ops)
 
-1. ~~F0–F5~~ **hechas** (software).
-2. Operación: completar catálogo, publicar JSON, enrolar device del padre (`docs/entrega-piloto.md`).
-3. Hosting de producción + `./scripts/build-piloto.sh` con URLs finales cuando existan.
+1. Connect **private** `codigos-transito-data` to **Cloudflare Pages**.
+2. Bake HTTPS URLs into pilot APK (`CATALOGO_URL` / `USUARIOS_URL`).
+3. Replace demo users with real pilot username/password + enroll device id (release).
+4. Grow the official catalog content over time.
 
 ---
 
-## 11. Checklist de cierre del contrato base
+## 11. Base contract checklist
 
-- [x] Visión y problema
-- [x] Usuarios objetivo (agente; piloto padre; un rol)
-- [x] Geografía / marco legal (Colombia)
-- [x] Tipo de producto
-- [x] MVP y fuera de alcance
-- [x] Criterios de éxito (piloto)
-- [x] Stack framework (**Flutter**, D-016)
-- [x] Auth (híbrido + device_id + multi-teléfono; sin IP; sin R1/R2 obligatorios)
-- [x] Fuentes/actualización del catálogo (D-023 — híbrido C desde día 1)
-- [x] Disclaimer / límites legales
-- [x] Privacidad (nivel experimental)
-- [x] Estándar de calidad / humo (D-024)
-- [x] Restricciones (experimental, APK, sin tiendas)
-- [x] Offline-first
-- [x] Modelo de contenido (solo código/categoría/descripcion)
-- [x] Sin IA; sin backend MVP
-- [x] Distribución **solo** Android APK; **iOS fuera de alcance**
+- [x] Vision and problem  
+- [x] Target users  
+- [x] Geography (Colombia)  
+- [x] Product type  
+- [x] MVP and out of scope  
+- [x] Success criteria  
+- [x] Stack (**Flutter**, Android APK)  
+- [x] Auth (username + password + device; hybrid JSON)  
+- [x] Catalog hybrid updates  
+- [x] Legal disclaimer  
+- [x] Privacy (experimental)  
+- [x] Quality smoke (D-024)  
+- [x] Offline-first  
+- [x] Content model + search  
+- [x] No AI; no app backend  
+- [x] Android-only distribution  
+- [x] Daily session  
+- [x] Portfolio vs private data hosting  
 
-**Checklist de contrato completo otra vez.** Siguiente: OK a `docs/fases.md` → implementación F0.
+**Base contract closed. Phases F0–F5 software complete. Remaining work is content + Cloudflare ops.**

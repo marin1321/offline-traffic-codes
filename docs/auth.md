@@ -1,96 +1,95 @@
-# Autenticación
+# Authentication
 
-> Contrato: **D-019**, **D-034**, **D-035** — **Decidido**.  
-> Nivel: pestillo experimental, no seguridad bancaria.
+> Contract: **D-019**, **D-034**, **D-035**, **D-036**, **D-037** — **Decided**.  
+> Level: experimental gate, not bank-grade security.
 
-## Resumen
+## Summary
 
-| Pieza | Acuerdo |
+| Piece | Agreement |
 | --- | --- |
-| Factores de login | **Usuario + contraseña + device_id** |
+| Login factors | **Username + password + device_id** |
 | IP | **No** |
-| Usuarios | **JSON híbrido** (seed/cache local + remoto) |
-| Enrolamiento | **Manual**: el agente manda el código del teléfono al promotor |
-| Teléfonos por usuario | **Varios** permitidos (`device_ids[]`) |
-| R1/R2 (TTL / sync obligatorio duro) | **No se exigen** — no importan al promotor |
-| Rol | Solo agente |
+| Users file | **Hybrid JSON** (local seed/cache + remote) |
+| Enrollment | **Manual**: agent sends phone code to promoter |
+| Phones per user | **Multiple** allowed (`device_ids[]`) |
+| R1/R2 offline revoke TTL | **Not required** |
+| Role | Agent only |
+| Session | **Local calendar day** only (D-036) |
+| Identifier | **`usuario`** (not national ID) |
 
 ## Login
 
-Entra si y solo si:
+Access is granted if and only if:
 
-1. Existe usuario con esa usuario y contraseña  
+1. A user exists with that **username** (case-insensitive) and password  
 2. `activo === true`  
-3. El `device_id` de **esta** instalación está en `device_ids`  
+3. This install’s `device_id` is in `device_ids` (**release** builds; debug may relax this)
 
 ## Device ID
 
-- UUID generado al primer arranque y guardado en el teléfono.  
-- La UI debe poder **mostrar/copiar** ese código para WhatsApp.  
-- No IMEI obligatorio. No IP.
+- UUID generated on first launch and stored on the phone.  
+- UI must **show/copy** that code for WhatsApp.  
+- No mandatory IMEI. No IP.  
+- Clearing app data creates a **new** device id.
 
-## Varios teléfonos
-
-Misma usuario/clave puede listar varios ids:
+## Multiple phones
 
 ```json
-"device_ids": ["uuid-telefono-laboral", "uuid-telefono-backup"]
+"device_ids": ["uuid-work-phone", "uuid-backup"]
 ```
 
-- **Añadir** un teléfono: el promotor agrega el id a la lista.  
-- **Quitar** un teléfono: borra solo ese id.  
-- **Revocar persona:** `activo: false` o eliminar el usuario.
+- **Add** a phone: promoter appends the id.  
+- **Remove** a phone: delete only that id.  
+- **Revoke person:** `activo: false` or remove the user.
 
-## Enrolamiento
+## Enrollment
 
 ```text
-1. Promotor crea usuario (usuario, clave, activo: true)
-2. Agente instala APK genérico → ve "Código de este teléfono"
-3. Se lo envía al promotor
-4. Promotor añade el id a device_ids y publica usuarios.json
-5. Agente, con red, sincroniza y hace login
+1. Promoter creates user (usuario, password, activo: true)
+2. Agent installs generic APK → sees "code for this phone"
+3. Sends it to the promoter
+4. Promoter adds id to device_ids and publishes usuarios.json
+5. Agent syncs (with network) and logs in
 ```
 
-## Híbrido `usuarios.json`
+## Hybrid `usuarios.json`
 
-1. Copia local (seed o última bajada).  
-2. Con red: GET remoto si `version` es mayor → reemplaza local.  
-3. Sin red: login con la copia local.  
-4. URL **distinta** a la del catálogo de infracciones.
+1. Local copy (seed or last download).  
+2. With network: GET remote if `version` is higher → replace local.  
+3. Without network: login against local copy.  
+4. **Different URL** from the infraction catalog.
 
-### Revocación offline (límite aceptado)
+### Offline revoke (accepted limit)
 
-Sin R1/R2 obligatorias: si alguien quedó revocado en el remoto pero **nunca** vuelve a sincronizar, puede seguir con la copia vieja. Se acepta. Con red, conviene refrescar usuarios en arranque o login **sin** TTL ni dramatizar.
+Without mandatory R1/R2: if someone is revoked remotely but **never** syncs again, they may keep the old copy. Accepted.
 
-## Forma del archivo
+## File shape
 
 ```json
 {
-  "version": 3,
+  "version": 5,
   "usuarios": [
     {
-      "usuario": "1234567890",
-      "password": "clave-simple",
-      "nombre": "Agente piloto",
+      "usuario": "oscar",
+      "password": "simple-password",
+      "nombre": "Pilot agent",
       "activo": true,
       "device_ids": [
-        "550e8400-e29b-41d4-a716-446655440000",
-        "7c9e6679-7425-40de-944b-e07fc1f90ae7"
+        "550e8400-e29b-41d4-a716-446655440000"
       ]
     }
   ]
 }
 ```
 
+## Session expiry (D-036)
+
+- After login OK, session lasts for the rest of the **calendar day** (device timezone).  
+- **Same day:** close and reopen → still inside (if still active + device OK).  
+- **Next day (from local 00:00):** open app → login screen again.  
+- Also cleared by manual logout, revoke, or device removal.  
+- No background timer; checked on open/restore.
+
 ## APK
 
-Un **APK genérico** para todos; la verdad de quién entra está en el JSON de usuarios (remoto + cache).
-
-
-## Caducidad de sesión (D-036)
-
-- Tras login OK, la sesión dura el resto del **día calendario** en la zona horaria del teléfono.
-- **Mismo día:** cerrar y abrir la app sigue dentro (si activo + device ok).
-- **Día siguiente (desde 00:00 locales):** al abrir pide usuario y contraseña otra vez.
-- También se cierra si: logout manual, revocación (`activo: false`), o device ya no autorizado.
-- No hay timer mientras la app está abierta; se comprueba al abrir/restaurar sesión.
+One **generic APK** for everyone when remote users JSON is used; who can enter is defined by that JSON (+ cache).

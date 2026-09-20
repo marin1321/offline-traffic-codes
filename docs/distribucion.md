@@ -1,37 +1,35 @@
-# Distribución e instalación
+# Distribution and install
 
-> Contrato: **D-015**, **D-020**, **D-033**.  
-> **Solo Android. Solo APK. Sin tiendas. Sin iOS.**
+> Contract: **D-015**, **D-020**, **D-033**.  
+> **Android only. APK only. No stores. No iOS.**
 
-## Android (único canal)
+## Android (only channel)
 
-| Paso | Qué pasa |
+| Step | What happens |
 | --- | --- |
-| 1 | Se genera el **`.apk`** con Flutter (`flutter build apk`). |
-| 2 | Se envía al agente (WhatsApp, Drive, cable…). |
-| 3 | En el teléfono se permite instalar apps de orígenes desconocidos. |
-| 4 | Se abre el APK → queda el icono instalado. |
-
-El piloto (padre) no exige un método concreto de instalación; **APK** es el estándar del proyecto.
+| 1 | Build `.apk` with Flutter (`flutter build apk` / `./scripts/build-piloto.sh`). |
+| 2 | Send to the agent (WhatsApp, Drive, cable…). |
+| 3 | Allow install from unknown sources on the phone. |
+| 4 | Open the APK → icon appears. |
 
 ## iOS
 
-**Fuera de alcance.** No hay cuenta Apple Developer ni soporte a iPhone. Compañeros con iPhone no son usuarios objetivo.
+**Out of scope.** No Apple Developer account and no iPhone support target.
 
-Si en el futuro se quisiera iOS, hay que **reabrir D-015 y D-020** en el contrato (no improvisar).
+Reopen **D-015 / D-020** in the contract before any iOS work.
 
-## Personalización por persona (Android) — si se confirma auth híbrida
+## Per-person customization
 
-1. Mismo **APK genérico** para todos.  
-2. Alta: cédula + clave en `usuarios.json` remoto + **device_id** que el agente te envía.  
-3. Baja/revocación: `activo: false` o borrar; el teléfono lo nota al sincronizar (y/o al vencer gracia offline).  
+With hybrid users JSON:
 
-Detalle: [`auth.md`](./auth.md).
+1. Same generic APK.  
+2. Onboard: username + password in remote `usuarios.json` + **device_id** the agent sends.  
+3. Revoke: `activo: false` or remove user; phone notices on next successful sync.
 
-## Actualizaciones
+## Updates
 
-| Cambio | ¿Nuevo APK? |
+| Change | New APK? |
 | --- | --- |
-| Nuevas infracciones (JSON remoto) | **No** |
-| Alta/baja usuario o cambio de device | **No** (JSON usuarios remoto) |
-| Seed / lógica de la app | **Sí** |
+| New infractions (remote JSON) | **No** (with network + sync) |
+| Add/remove user or device | **No** (remote users JSON) |
+| App logic / UI | **Yes** |
