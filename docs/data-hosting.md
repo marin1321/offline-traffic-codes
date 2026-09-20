@@ -18,8 +18,12 @@
 
 ```text
 codigos-transito-data/          # private on GitHub
-  catalogo.json
-  usuarios.json
+  public/
+    catalogo.json               # served by Cloudflare (edit here)
+    usuarios.json
+    index.html
+  src/index.js
+  wrangler.toml
   README.md
 ```
 
